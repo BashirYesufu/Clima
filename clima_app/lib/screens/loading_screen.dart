@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:clima_app/services/location.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -9,12 +9,18 @@ class LoadingScreen extends StatefulWidget {
 }
 
 void getLocation() async {
-  await Geolocator.requestPermission();
-  Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-  print(position);
+  Location location = Location();
+  await location.getCurrentLocation();
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
