@@ -20,6 +20,7 @@ void getData() async {
 
   if (response.statusCode == 200) {
     String data = response.body;
+
     var decodeData = jsonDecode(data);
     double temperature = decodeData['main']['temp'];
     int condition = decodeData['weather'][0]['id'];
